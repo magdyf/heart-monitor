@@ -6,7 +6,7 @@ export default function PrivacyPolicyPage() {
       <h1 className="text-3xl font-bold mb-8 gradient-text">Privacy Policy</h1>
       <div className="space-y-6 text-gray-600 dark:text-gray-400">
         <p>
-          Last updated: July 26, 2024
+          Last updated: July 25, 2024
         </p>
         <p>
           Heart Listener (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our Heart Listener application.
