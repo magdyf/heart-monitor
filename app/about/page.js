@@ -43,7 +43,7 @@ export default function AboutPage() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-4">Our Team</h2>
+        <h2 className="text-3xl font-bold mb-8 gradient-text">Our Team</h2>
         {teamMembers.map((member, index) => (
           <TeamMember 
             key={index}
