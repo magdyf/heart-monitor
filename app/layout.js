@@ -1,56 +1,71 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import Head from 'next/head'
-import ThemeProvider from '../components/ThemeProvider'
-import ThemeSwitcher from '../components/ThemeSwitcher'
 import Script from 'next/script'
-
+import Image from 'next/image'
+import dynamic from 'next/dynamic'
+import ThemeProvider from '../components/ThemeProvider'
 const inter = Inter({ subsets: ['latin'] })
+const ThemeSwitcher = dynamic(() => import('../components/ThemeSwitcher'), { ssr: false })
 
 export const metadata = {
+  metadataBase: new URL('https://www.onlineheartlistener.com'),
   title: 'Heart Listener - Real-time Heart Rate Tracking',
   description: 'Monitor your heart rate in real-time with Heart Listener. Accurate, easy-to-use, and accessible from any device.',
-  keywords: 'heart rate monitor, pulse tracker, health app, fitness tracking, real-time monitoring, heart bpm using microphone, heart bpm, heart rate counter, bpm counter'
-}
-
+  keywords: 'heart rate monitor, pulse tracker, health app, fitness tracking, real-time monitoring, heart bpm using microphone, heart bpm, heart rate counter, bpm counter',
+  openGraph: {
+    title: 'Heart Listener - Real-time Heart Rate Tracking',
+    description: 'Monitor your heart rate in real-time with Heart Listener. Accurate, easy-to-use, and accessible from any device.',
+    type: 'website',
+    url: 'https://www.onlineheartlistener.com',
+    siteName: 'Heart Listener',
+    images: [
+      {
+        url: '/apple-icon.png',
+        width: 1200,
+        height: 630,
+        alt: 'Heart Listener OG Image',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Heart Listener - Real-time Heart Rate Tracking',
+    description: 'Monitor your heart rate in real-time with Heart Listener. Accurate, easy-to-use, and accessible from any device.',
+    images: ['/apple-icon.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/heart-listener-icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-icon.png',
+  },
+  manifest: '/manifest.json',
+};
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="canonical" href="https://www.onlineheartlistener.com" />
-        <meta property="og:title" content={metadata.title} />
-        <meta property="og:description" content={metadata.description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/og-image.jpg" />
-        <meta property="og:url" content="https://www.onlineheartlistener.com" />
-        <meta property="og:site_name" content="Heart Listener" />
-        <meta property="og:keywords" content="heart rate monitor, pulse tracker, health app, fitness tracking, real-time monitoring, heart bpm using microphone, heart bpm, heart rate counter, bpm counter" />
-        <meta name="twitter:keywords" content="heart rate monitor, pulse tracker, health app, fitness tracking, real-time monitoring, heart bpm using microphone, heart bpm, heart rate counter, bpm counter" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metadata.title} />
-        <meta name="twitter:description" content={metadata.description} />
-        <meta name="twitter:image" content="/twitter-image.jpg" />
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline';" />
-      </Head>
       <body className={inter.className}>
         <ThemeProvider>
-            <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
+          <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
             {/* Header */}
             <header className="bg-white dark:bg-gray-800 shadow-md relative">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                 <div className="flex justify-between items-center ">
                   {/* Logo */}
                   <a href="/" className="flex items-center">
-                    <svg className="h-10 w-10 text-red-500 heartbeat-animation" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
+                    <Image src="/heart-listener-icon.svg" alt="Heart Listener Logo" width={40} height={40} priority />
                     <span className="ml-2 text-2xl font-bold gradient-text">Heart Listener</span>
                   </a>
                   {/* Navigation and Theme Switcher */}
@@ -77,11 +92,10 @@ export default function RootLayout({ children }) {
                   </div>
                 </div>
               </div>
-              <div id="menuOverlay" className="hidden fixed inset-0 z-40"></div>
-               {/* Mobile Menu */}
-               <div id="mobileMenu" className="hidden md:hidden absolute top-full right-0 bg-white dark:bg-gray-800 shadow-md">
+              {/* Mobile Menu */}
+              <div id="mobileMenu" className="hidden md:hidden absolute top-full right-0 bg-white dark:bg-gray-800 shadow-md">
                 <div className="py-2">
-                  <a href="/" className="block text-right text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition duration-300 px-6 py-2">Home</a>
+                  <a href="/" className="block text-right text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition duration-300 px-6 py-2 z-20">Home</a>
                   <a href="/about" className="block text-right text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition duration-300 px-6 py-2">About</a>
                   <a href="mailto:magdyfares.studios@gmail.com" className="block text-right text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition duration-300 px-6 py-2">Contact</a>
                   <a href="/privacy" className="block text-right text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition duration-300 px-6 py-2">Privacy</a>
@@ -141,8 +155,28 @@ export default function RootLayout({ children }) {
           </div>
         </ThemeProvider>
         <Script
-          src="mobileMenu.js" 
+          src="mobileMenu.js"
           strategy="afterInteractive"
+        />
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "Heart Listener",
+              "url": "https://www.onlineheartlistener.com",
+              "description": "Monitor your heart rate in real-time with Heart Listener. Accurate, easy-to-use, and accessible from any device.",
+              "applicationCategory": "HealthApplication",
+              "operatingSystem": "All",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              }
+            })
+          }}
         />
       </body>
     </html>

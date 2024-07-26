@@ -1,32 +1,22 @@
 function setupMobileMenu() {
   const menuButton = document.getElementById('menuButton');
   const mobileMenu = document.getElementById('mobileMenu');
-  const menuOverlay = document.getElementById('menuOverlay');
 
   function toggleMenu() {
     mobileMenu.classList.toggle('hidden');
-    menuOverlay.classList.toggle('hidden');
     document.body.classList.toggle('overflow-hidden');
+    menuButton.setAttribute('aria-expanded', mobileMenu.classList.contains('hidden') ? 'false' : 'true');
   }
 
-  if (menuButton && mobileMenu && menuOverlay) {
+  if (menuButton && mobileMenu) {
     menuButton.addEventListener('click', function(event) {
       event.stopPropagation();
       toggleMenu();
     });
 
-    menuOverlay.addEventListener('click', toggleMenu);
-
     // Close menu when clicking on a menu item
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', toggleMenu);
-    });
-
-    // Close menu when pressing Escape key
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-        toggleMenu();
-      }
     });
   }
 }

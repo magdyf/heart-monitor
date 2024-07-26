@@ -11,7 +11,7 @@ export default function FAQPage() {
   const faqs = [
     {
       question: "How accurate is Heart Listener?",
-      answer: "Our Heart Listener is designed to provide a close approximation of your heart rate. While it's not a medical-grade device, it offers a reliable estimate for general fitness and wellness purposes."
+      answer: "Our Heart Listener is designed to provide a close approximation of your heart rate. While it&apos;s not a medical-grade device, it offers a reliable estimate for general fitness and wellness purposes."
     },
     {
       question: "Can I use Heart Listener during exercise?",
@@ -27,7 +27,7 @@ export default function FAQPage() {
     },
     {
       question: "Can Heart Listener detect heart problems?",
-      answer: "Heart Listener is not designed to diagnose or detect heart problems. It's a tool for general wellness. If you have concerns about your heart health, please consult a medical professional."
+      answer: "Heart Listener is not designed to diagnose or detect heart problems. It&apos;s a tool for general wellness. If you have concerns about your heart health, please consult a medical professional."
     }
   ];
 

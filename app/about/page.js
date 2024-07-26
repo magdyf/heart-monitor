@@ -35,15 +35,15 @@ export default function AboutPage() {
         <h2 className="text-2xl font-semibold mb-4">What We Do</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Heart Listener is an innovative application that turns your smartphone into a heart rate monitor. 
-          Using advanced audio processing technology, we capture your heartbeat through your device's 
-          microphone, providing a convenient way to check your heart rate anytime, anywhere. Whether you're 
+          Using advanced audio processing technology, we capture your heartbeat through your device&apos;s 
+          microphone, providing a convenient way to check your heart rate anytime, anywhere. Whether you&apos;re 
           tracking your fitness progress, managing stress, or simply curious about your heart health, 
           Heart Listener is your personal cardiac companion.
         </p>
       </section>
 
       <section>
-      <h1 className="text-3xl font-bold mb-8 gradient-text">Our Team</h1>
+        <h2 className="text-2xl font-semibold mb-4">Our Team</h2>
         {teamMembers.map((member, index) => (
           <TeamMember 
             key={index}

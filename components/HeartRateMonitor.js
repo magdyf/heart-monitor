@@ -89,19 +89,19 @@ export default function HeartRateMonitor() {
             setErrorMessage('Microphone access requires a secure connection (HTTPS). Please use a secure connection and try again.');
             return;
         }
-        console.log("Starting recording");
+        //console.log("Starting recording");
         try {
             setErrorMessage('');
             setWarningMessage('');
 
             // Create AudioContext
             audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
-            console.log("AudioContext created:", audioContextRef.current);
+            //console.log("AudioContext created:", audioContextRef.current);
 
             // Create AnalyserNode
             analyserRef.current = audioContextRef.current.createAnalyser();
             analyserRef.current.fftSize = 2048;
-            console.log("AnalyserNode created:", analyserRef.current);
+            //console.log("AnalyserNode created:", analyserRef.current);
 
             let stream;
 
@@ -121,7 +121,7 @@ export default function HeartRateMonitor() {
                 } else {
                     throw new Error('Audio input is not supported');
                 }
-                console.log("Audio stream obtained successfully");
+                //console.log("Audio stream obtained successfully");
             } catch (err) {
                 console.error('Error getting audio stream:', err);
                 handleMicrophoneError(err);
@@ -131,14 +131,14 @@ export default function HeartRateMonitor() {
             streamRef.current = stream;
             sourceRef.current = audioContextRef.current.createMediaStreamSource(stream);
             sourceRef.current.connect(analyserRef.current);
-            console.log("Audio source connected to analyser");
+            //console.log("Audio source connected to analyser");
 
             const bufferLength = analyserRef.current.frequencyBinCount;
             dataArrayRef.current = new Uint8Array(bufferLength);
-            console.log("Buffer created with length:", bufferLength);
+            //console.log("Buffer created with length:", bufferLength);
 
             setIsRecording(true);
-            console.log('Set isRecording to true');
+            //console.log('Set isRecording to true');
 
         } catch (error) {
             console.error('Error starting recording:', error);
@@ -171,13 +171,13 @@ export default function HeartRateMonitor() {
     }, [setHeartRate, setInstantRate]);
     
     const stopRecording = useCallback(() => {
-        console.log("Stopping recording");
+        //console.log("Stopping recording");
         setIsRecording(false);
         cleanupAudioResources();
         if (dataArrayRef.current) {
             dataArrayRef.current.fill(0);
         }
-        console.log("Recording stopped and cleaned up");
+        //console.log("Recording stopped and cleaned up");
     }, [setIsRecording]);
 
 
@@ -228,14 +228,14 @@ export default function HeartRateMonitor() {
                     const instantaneousHeartRate = Math.round(60 / beatDuration);
 
                     if (instantaneousHeartRate >= 40 && instantaneousHeartRate <= 200) {
-                        console.log("Valid heart rate detected:", instantaneousHeartRate);
+                        //console.log("Valid heart rate detected:", instantaneousHeartRate);
                         return instantaneousHeartRate;
                     }
                 } else {
-                    console.log("Second sound of the same beat detected");
+                    //console.log("Second sound of the same beat detected");
                 }
             } else {
-                console.log("Peak detected, but too soon after the last one");
+                //console.log("Peak detected, but too soon after the last one");
             }
         }
 
@@ -245,16 +245,16 @@ export default function HeartRateMonitor() {
 
 
     const detectHeartRate = useCallback(() => {
-        console.log("detectHeartRate called, isRecording:", isRecordingRef.current, "analyserRef.current:", !!analyserRef.current);
+        //console.log("detectHeartRate called, isRecording:", isRecordingRef.current, "analyserRef.current:", !!analyserRef.current);
 
         if (!analyserRef.current || !isRecordingRef.current) {
-            console.log("Detection stopped: analyser not available or recording stopped");
+            //console.log("Detection stopped: analyser not available or recording stopped");
             return;
         }
 
         try {
             analyserRef.current.getByteTimeDomainData(dataArrayRef.current);
-            console.log("Audio data received, first few values:", dataArrayRef.current.slice(0, 5));
+            //console.log("Audio data received, first few values:", dataArrayRef.current.slice(0, 5));
 
             const heartRateValue = calculateHeartRate(dataArrayRef.current);
             if (heartRateValue) {
@@ -267,9 +267,9 @@ export default function HeartRateMonitor() {
                     heartRateHistory.current.reduce((a, b) => a + b) / heartRateHistory.current.length
                 );
                 setHeartRate(averageHeartRate);
-                console.log("Updated average heart rate:", averageHeartRate);
+                //console.log("Updated average heart rate:", averageHeartRate);
             } else {
-                console.log("No valid heart rate detected in this frame");
+                //console.log("No valid heart rate detected in this frame");
             }
 
             if (isRecordingRef.current) {
@@ -348,11 +348,11 @@ export default function HeartRateMonitor() {
 
     useEffect(() => {
         if (isRecordingState) {
-            console.log('isRecording is true, starting detection and waveform');
+            //console.log('isRecording is true, starting detection and waveform');
             detectHeartRate();
             drawWaveform();
         }else{
-            console.log('isRecording is false, stopping detection and waveform');
+            //console.log('isRecording is false, stopping detection and waveform');
         }
     }, [isRecordingState, detectHeartRate, drawWaveform]);
 

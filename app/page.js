@@ -23,7 +23,7 @@ export default function Home() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">1. Place Device</h3>
-            <p className="text-gray-600 dark:text-gray-400">Position your device's microphone on your chest or wrist.</p>
+            <p className="text-gray-600 dark:text-gray-400">Position your device&apos;s microphone on your chest or wrist.</p>
           </div>
           <div className="text-center">
             <div className="bg-white dark:bg-gray-800 rounded-full p-4 inline-block mb-4">
@@ -33,7 +33,7 @@ export default function Home() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">2. Start Monitoring</h3>
-            <p className="text-gray-600 dark:text-gray-400">Click the 'Start Monitoring' button to begin tracking.</p>
+            <p className="text-gray-600 dark:text-gray-400">Click the &apos;Start Monitoring&apos; button to begin tracking.</p>
           </div>
           <div className="text-center">
             <div className="bg-white dark:bg-gray-800 rounded-full p-4 inline-block mb-4">
@@ -50,7 +50,7 @@ export default function Home() {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold mb-4">Easy to Use</h3>
-          <p className="text-gray-600 dark:text-gray-400">Simply place your device's microphone on your chest or wrist to start monitoring your heart rate.</p>
+          <p className="text-gray-600 dark:text-gray-400">Simply place your device&apos;s microphone on your chest or wrist to start monitoring your heart rate.</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold mb-4">Accurate Results</h3>
