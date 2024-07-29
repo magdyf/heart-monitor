@@ -4,6 +4,8 @@ import Script from 'next/script'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import ThemeProvider from '../components/ThemeProvider'
+import { Analytics } from "@vercel/analytics/react"
+
 const inter = Inter({ subsets: ['latin'] })
 const ThemeSwitcher = dynamic(() => import('../components/ThemeSwitcher'), { ssr: false })
 
