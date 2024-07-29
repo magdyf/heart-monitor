@@ -6,13 +6,18 @@ import dynamic from 'next/dynamic'
 import ThemeProvider from '../components/ThemeProvider'
 import { Analytics } from "@vercel/analytics/react"
 
+
 const inter = Inter({ subsets: ['latin'] })
 const ThemeSwitcher = dynamic(() => import('../components/ThemeSwitcher'), { ssr: false })
 
 export const metadata = {
   metadataBase: new URL('https://www.onlineheartlistener.com'),
+  title: {
+    default: 'Heart Listener',
+    template: '%s | Heart Listener'
+  },
   title: 'Heart Listener - Real-time Heart Rate Tracking',
-  description: 'Monitor your heart rate in real-time with Heart Listener. Accurate, easy-to-use, and accessible from any device.',
+  description: 'Use your microhpone to monitor your heart rate in real-time with Heart Listener. Accurate, easy-to-use, and accessible from any device.',
   keywords: 'heart rate monitor, pulse tracker, health app, fitness tracking, real-time monitoring, heart bpm using microphone, heart bpm, heart rate counter, bpm counter',
   openGraph: {
     title: 'Heart Listener - Real-time Heart Rate Tracking',
@@ -160,26 +165,7 @@ export default function RootLayout({ children }) {
           src="mobileMenu.js"
           strategy="afterInteractive"
         />
-        <Script
-          id="structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              "name": "Heart Listener",
-              "url": "https://www.onlineheartlistener.com",
-              "description": "Monitor your heart rate in real-time with Heart Listener. Accurate, easy-to-use, and accessible from any device.",
-              "applicationCategory": "HealthApplication",
-              "operatingSystem": "All",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              }
-            })
-          }}
-        />
+        <Analytics />
       </body>
     </html>
   )
